@@ -13,7 +13,7 @@ class Database():
     def connect(self):
         try:
             self.my_client = MongoClient(self.host,self.port)
-            self.my_db = self.my_client[keys["mongo_client"]["database"]]
+            #self.my_db = self.my_client[keys["mongo_client"]["database"]]
         except:
             print("Connection to the database failed")
 

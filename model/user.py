@@ -1,11 +1,11 @@
 from config.db import db
+from config.key import keys
 
-#user = { "name": "Joana", "age": 21 }
-
-class UserModel():
+class UserModel(object):
 
     def __init__(self):
-        self.collection = db.my_db["user"]
+        self.db             = db.my_client[keys["mongo_client"]["database"]]
+        self.collection     = self.db["user"]
 
     def find_by_id(self, id):
         user = self.collection.find_one({ "_id": id })
