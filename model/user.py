@@ -1,11 +1,17 @@
-from config.db import db
+from config.db import Database
 from config.key import keys
+
+db = Database()
 
 class UserModel(object):
 
     def __init__(self):
-        self.db             = db.my_client[keys["mongo_client"]["database"]]
-        self.collection     = self.db["user"]
+        #self.db             = db.my_client[keys["mongo_client"]["database"]]
+        self.collection     = db.my_db["user"]
+
+    def find_all(self):
+        users = self.collection.find()
+        return users
 
     def find_by_id(self, id):
         user = self.collection.find_one({ "_id": id })
@@ -20,8 +26,8 @@ class UserModel(object):
         return save
 
     def update_by_id(self, id, values):
-        delete = self.collection.update_one({ "_id": id }, values)
-        return delete
+        update = self.collection.update_one({ "_id": id }, values)
+        return update
     
     def delete_by_id(self, id):
         delete = self.collection.delete_one({ "_id": id })
